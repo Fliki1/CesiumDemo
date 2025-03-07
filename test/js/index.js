@@ -10,10 +10,13 @@ Cesium.Ion.defaultAccessToken = cesiumAccessToken;
 // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
 const viewer = new Cesium.Viewer("cesiumContainer", {
     terrain: Cesium.Terrain.fromWorldTerrain({
-        requestWaterMask: true,
+        requestWaterMask: false,
         requestVertexNormals: true,
+        navigationHelpButton: false,  // Disabilita il pulsante di aiuto navigazione
     }),
 });
+viewer.animation.container.style.visibility = 'hidden';  // Nasconde il controllo di animazione
+viewer.timeline.container.style.visibility = 'hidden';  // Nasconde la timeline
 
 
 /*
@@ -166,13 +169,22 @@ const geoJsonResource = await Cesium.IonResource.fromAssetId(2920938);
 const geoJsonDataSource = await Cesium.GeoJsonDataSource.load(geoJsonResource);
 viewer.dataSources.add(geoJsonDataSource);
 
+// Flag per tenere traccia della visibilità
+let isGeoJsonVisible = true;
+document.getElementById("toggleGeoJson").addEventListener("click", function () {
+    isGeoJsonVisible = !isGeoJsonVisible;
+    geoJsonDataSource.show = isGeoJsonVisible;
+    this.textContent = isGeoJsonVisible ? "Nascondi GeoJSON" : "Mostra GeoJSON";
+});
+
+
 // Caricamento del KML
-const kmlResource = await Cesium.IonResource.fromAssetId(2920934);
+/* const kmlResource = await Cesium.IonResource.fromAssetId(2920934);
 const kmlDataSource = await Cesium.KmlDataSource.load(kmlResource, {
     camera: viewer.scene.camera,
     canvas: viewer.scene.canvas,
 });
-viewer.dataSources.add(kmlDataSource);
+viewer.dataSources.add(kmlDataSource); */
 
 // Funzione per mostrare informazioni quando si clicca su un'entità
 viewer.screenSpaceEventHandler.setInputAction((click) => {

@@ -21,17 +21,11 @@ viewer.scene.setTerrain(
     ),
 );
 
-
-
-
 // Creiamo i modelli (tree) mancanti
 // createModel(viewer, url, lon, lat, height)
 trees.features.forEach(feature => {
     createModel(viewer, url.treeGlb, feature.geometry.coordinates[0], feature.geometry.coordinates[1], 0)
 });
-
-
-
 
 // Add Cesium OSM Buildings, a global 3D buildings layer.
 const buildingTileset = await Cesium.createOsmBuildingsAsync();

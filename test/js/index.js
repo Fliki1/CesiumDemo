@@ -32,7 +32,6 @@ async function loadTilesets(urls) {
                 continue;
             }
 
-
             if (fixedTile.includes(name)) {
 
                 // Carica il tileset
@@ -42,11 +41,8 @@ async function loadTilesets(urls) {
 
                 // Salva l'ultimo tileset caricato
                 lastTileset = tileset;
-
-
                 continue;
             }
-
 
             // Carica il tileset
             const tileset = await Cesium.Cesium3DTileset.fromUrl(tilesetUrl);

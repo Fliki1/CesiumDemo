@@ -1,0 +1,13 @@
+*,
+body {
+    box-sizing: border-box;
+
+    /* Rimuovono qualsiasi margine e padding predefiniti, 
+    assicurando che gli elementi occupino esattamente l'intera area disponibile senza spazi aggiuntivi */
+    margin: 0;
+    padding: 0;
+}
+
+.h-100 {
+    height: 100vh !important;
+}

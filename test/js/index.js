@@ -171,11 +171,13 @@ viewer.dataSources.add(geoJsonDataSource);
 
 // Flag per tenere traccia della visibilità
 let isGeoJsonVisible = true;
-document.getElementById("toggleGeoJson").addEventListener("click", function () {
-    isGeoJsonVisible = !isGeoJsonVisible;
-    geoJsonDataSource.show = isGeoJsonVisible;
-    this.textContent = isGeoJsonVisible ? "Nascondi GeoJSON" : "Mostra GeoJSON";
+document.getElementById("toggleGeoJson").addEventListener("change", function () {
+    if (geoJsonDataSource) {
+        isGeoJsonVisible = this.checked;
+        geoJsonDataSource.show = isGeoJsonVisible;
+    }
 });
+
 
 
 // Caricamento del KML

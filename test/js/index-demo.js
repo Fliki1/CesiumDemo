@@ -2,8 +2,6 @@ import { cesiumAccessToken, url } from "./cesiumConfig.js";
 import { trees } from "./coordinate.js";
 import { createModel } from "./cesiumFun.js";
 
-// Your access token can be found at: https://ion.cesium.com/tokens.
-// Replace `your_access_token` with your Cesium ion access token.
 
 Cesium.Ion.defaultAccessToken = cesiumAccessToken;
 

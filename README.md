@@ -1,57 +1,57 @@
 # Cesium Test & Demo Repository
 
-Questo repository contiene una serie di preliminary test e demo utilizzando Cesium, una piattaforma open-source per la visualizzazione di dati 3D geospaziali. Il progetto include esempi pratici per l'importazione di diversi tipi di dati geospaziali, tra cui:
+This repository contains a series of tests and demos using Cesium, an open-source platform for visualizing 3D geospatial data. The project includes practical examples of importing different types of geospatial data, such as:
 
-* Modelli 3D
+* 3D models
 * Bing/Google/Cesium World Terrain
-* Sistemi OSM (OpenStreetMap)
-* Strutture KML e GeoJSON
+* OpenStreetMap (OSM) data
+* KML and GeoJSON structures
 
-Gran parte degli esperimenti sono presenti nella cartella [text](test) con la seguente struttura: 
+## Project Structure
+The [text](test) folder contains most of the experiments and is organized as follows:
 
 ```
 test/
 ├── cesiumTile/     # 3D Tile models
 │   └── tileset_folders/
 ├── css/         
-├── data/           # free geospatial data formats
-├── glbData/        # free samples models
+├── data/           # Open geospatial data
+├── glbData/        # Sample 3D models
 ├── js/
 │   ├── cesimConfig.js      # cesiumAccessToken and tileset urls
-│   ├── cesiumFun.js        # export function to load tileset  
-│   ├── index.js            # main 3D tileset upload
-│   └── debugBoundingBox.js # set bounding box tile glb and wireframe model
-└── index.html      # main html
+│   ├── cesiumFun.js        # functions for loading tilesets  
+│   ├── index.js            # main
+│   └── debugBoundingBox.js # visualizes bounding boxes and wireframes
+└── index.html      
 ```
 
-Inoltre, il repository fornisce una GUI che permette di applicare o rimuovere effetti visivi sui modelli e sulle strutture, come la visualizzazione di texture, illuminazione e altro.
+The repository also includes a preliminary GUI that lets users apply or remove visual effects.
 
-## Note d'uso
-Per facilitare l'utilizzo di un server locale è possibile utilizare una Extension di Visual Studio: Live Server (ritwickdey.LiveServer) il quale riesce a simulare un server sul file index.html delle singole demo. Una volta importata l'estensione, tasto destro sul file html per avviare e stoppare il server locale.
+## Running a Local Server
+To run the project locally, you can use the Live Server extension for Visual Studio Code (ritwickdey.LiveServer), which simulates a local server for the `index.html` file of each demo. After installing the extension, simply right-click the HTML file and select Start Live Server to launch it in your browser.
 
 <center><img src="img/image.png" width="200" align="center"></center>
 
-Si verrà reindirizzati su un indirizzo simile http://127.0.0.1:1234/index.html
+This will open a browser window with a URL like http://127.0.0.1:1234/index.html.
 
 ---
 
-Un altro metodo è scaricare e installare Node.js e npm da https://nodejs.org/en/download/
+Another option is to install Node.js and npm from the [official Node.js website](https://nodejs.org/en/download/).
 
-Nella riga di comando, eseguire:
-```
+Then, in the terminal or command prompt, run:
+```bash
 npm install http-server -g
 ```
-Questo installerà l'app http-server da https://github.com/http-party/http-server su visibilità globale.
+This globally installs [http-server](https://github.com/http-party/http-server), a simple static file server.
 
-Nella directory che contiene i dati di esempio (test), eseguire:
-```
+Next, navigate to the `test` directory and start the server with:
+```bash
 http-server -a localhost -p 8003 --cors=http://localhost:8080/
 ```
-Questo avvierà il server all'indirizzo `localhost`, utilizzando la porta `8003`. Il parametro `cors` permetterà a Cesium di accedere ai dati da questo server eseguito localmente.
+This starts a local server on `localhost`, using port `8003`. The `--cors` option allows Cesium to access the locally hosted data.
 
-In questa casistica è richiesto che un tileset debba essere referato impostando l'URL caricato dal server locale:
-
-```
+To load a tileset from the local server, use the following code:
+```javascript
 const tileset = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
     url : 'http://localhost:8003/example/tileset.json'
 }));
@@ -61,29 +61,33 @@ const tileset = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
 
 <center><img src="img/test.png" width="600" align="center"></center>
 
-Da immagine è possibile vedere un set di modelli tiled importati correttamente e visualizzati sopra una mappa geospaziale di Cesium, insieme a modelli forniti da OpenStreetMap. 
+The image above shows a 3D tileset successfully imported and displayed over a Cesium geospatial map, alongside OpenStreetMap buildings.
 
-A seguito della naturale conformità delle frane è stato necessario in corrispondenza di questi modelli eseguire un'operazione di sottrazione sulla superficie del terreno, che ha rimosso la parte di suolo che sovrastava la frana. Senza questo i modelli in questione sarebbero stati visibili solo in parte, poiché coperti dal terreno circostante.
+Since landslides alter the natural shape of the terrain, we applied terrain subtraction to remove sections of the ground that originally covered the landslide area. Without this adjustment, the models would have been partially obscured by the surrounding landscape.
 
 <center><img src="img/tile resolution.png" width="500" align="center"></center>
 
-Diverse prove sono state effettuate dimostrando come la qualità dei modelli tiled è alta, con una visualizzazione chiara dei dettagli architettonici grazie alla loro intrinseca struttura di suddivisione in piccoli tiles che rappresentano sezioni geografiche del modello. Ogni tile può avere diversi livelli di dettaglio (LOD) che vengono renderizzati sequenzialmente in base alla distanza dalla camera.
+Our tests confirm that 3D tilesets provide high-quality rendering. Thanks to their Level of Detail (LOD) system, models dynamically adjust based on the camera's distance, ensuring optimal performance and visual clarity.
 
 <center><img src="img/bounding box.png" width="600" align="center"></center>
 
-Nell'immagine sono visibili le bounding box dei tile che costutuiscono l'edificio. Grazie alla modalità wireframe, è possibile osservare il progressivo aumento dei dettagli che vengono caricati man mano che la camera si avvicina, seguendo le caratteristiche tipiche dei modelli tileset.
+The image above highlights the bounding boxes of individual tiles that make up the building. Wireframe mode helps visualize how details progressively increase as the camera moves closer, demonstrating the efficiency of the tileset system.
 
-Questa differenza si nota maggiormente nei modelli in formato obj i quali, oltre alla necessità di essere convertiti in CesiumION in quanto non direttamente importabili su CesiumJS, riportano solamente un unico livello di dettaglio.
+Unlike Cesium Tilesets, OBJ models need to be converted using Cesium ION before they can be imported into CesiumJS. Additionally, OBJ models lack LOD support, meaning they always display the same level of detail, regardless of the camera's distance.
 
 <center><img src="img/obj.png" width="600" align="center"></center>
 
-Nei modelli Tiled, abbiamo integrato strutture KML e GeoJSON, rendendole interattive e cliccabili per visualizzare informazioni sulle zone di interesse.
+The repository also integrates KML and GeoJSON structures, making them clickable and interactive. Users can retrieve information about specific areas of interest directly within the visualization.
 
 <center><img src="img/gif.gif" width="600" align="center"></center>
 <center><img src="img/infobox.png" width="300" align="center"></center>
 
-Gli esperimenti sono stati condotti sui modelli ottenuti dalle survey realizzate per l'Innovation Grant HaMMon nel comune di Tredozio.
+These experiments were conducted using survey data collected for the Innovation Grant HaMMon in the municipality of Tredozio.
+
+## License
+
+The scripts in this repository are distributed under the terms of the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgements
 
-This work is supported by Italian Research Center on High Performance Computing Big Data and Quantum Computing (ICSC), project funded by European Union - NextGenerationEU - and National Recovery and Resilience Plan (NRRP) - Mission 4 Component 2 within the activities of Spoke 3 (Astrophysics and Cosmos Observations
+This work is supported by Italian Research Center on High Performance Computing Big Data and Quantum Computing (ICSC), project funded by European Union - NextGenerationEU - and National Recovery and Resilience Plan (NRRP) - Mission 4 Component 2 within the activities of Spoke 3 (Astrophysics and Cosmos Observations).

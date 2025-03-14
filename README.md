@@ -31,7 +31,7 @@ Per facilitare l'utilizzo di un server locale è possibile utilizare una Extensi
 
 <center><img src="img/image.png" width="200" align="center"></center>
 
-Si verrà reindirizzati su un http://localhost:8080/
+Si verrà reindirizzati su un indirizzo simile http://127.0.0.1:1234/index.html
 
 ---
 
@@ -57,16 +57,29 @@ const tileset = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
 }));
 ```
 ---
-## Few results
+## Main results
 
 <center><img src="img/test.png" width="600" align="center"></center>
 
-E' possibile vedere un set di modelli tiled importati correttamente e visualizzati sopra una mappa geospaziale di Cesium, insieme a modelli forniti da OpenStreetMap. 
+Da immagine è possibile vedere un set di modelli tiled importati correttamente e visualizzati sopra una mappa geospaziale di Cesium, insieme a modelli forniti da OpenStreetMap. 
 
-A seguito della naturale conformità delle frane è stato necessario in corrispondenza di questi modelli eseguire un'operazione di sottrazione sulla superficie del terreno, che ha rimosso la parte di suolo che sovrastava la frana. Senza questo le frane sarebbero state visibili solo in parte, poiché coperti dal terreno circostante.
+A seguito della naturale conformità delle frane è stato necessario in corrispondenza di questi modelli eseguire un'operazione di sottrazione sulla superficie del terreno, che ha rimosso la parte di suolo che sovrastava la frana. Senza questo i modelli in questione sarebbero stati visibili solo in parte, poiché coperti dal terreno circostante.
 
-Diverse prove sono state effettuate dimostrando come la qualità dei modelli tiled è alta, con una visualizzazione chiara dei dettagli architettonici grazie alla loro intrinseca struttura di suddivisione in piccoli tiles che rappresentano sezioni geografiche del modello. Ogni tile può avere diversi livelli di dettaglio (LOD) che vengono selezionati dinamicamente in base alla distanza dalla camera. 
 
-Questa differenza si nota dai modelli in formato obj i quali, oltre alla necessità di essere convertiti in CesiumION e non direttamente importabili su CesiumJS, riportano solamente un unico livello di dettaglio.
+
+Diverse prove sono state effettuate dimostrando come la qualità dei modelli tiled è alta, con una visualizzazione chiara dei dettagli architettonici grazie alla loro intrinseca struttura di suddivisione in piccoli tiles che rappresentano sezioni geografiche del modello. Ogni tile può avere diversi livelli di dettaglio (LOD) che vengono renderizzati sequenzialmente in base alla distanza dalla camera.
+
+<center><img src="img/bounding box.png" width="600" align="center"></center>
+
+Nell'immagine sono visibili le bounding box dei tile che costutuiscono l'edificio. Grazie alla modalità wireframe, è possibile osservare il progressivo aumento dei dettagli che vengono caricati man mano che la camera si avvicina, seguendo le caratteristiche tipiche dei modelli tileset.
+
+Questa differenza si nota maggiormente nei modelli in formato obj i quali, oltre alla necessità di essere convertiti in CesiumION in quanto non direttamente importabili su CesiumJS, riportano solamente un unico livello di dettaglio.
 
 <center><img src="img/obj.png" width="600" align="center"></center>
+
+
+
+<center><img src="img/gif.gif" width="600" align="center"></center>
+<center><img src="img/infobox.png" width="300" align="center"></center>
+
+Gli esperimenti sono stati condotti sui modelli ottenuti dalle survey realizzate per l'Innovation Grant HaMMon nel comune di Tredozio.

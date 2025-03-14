@@ -1,0 +1,94 @@
+*,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Cesium */
+#cesiumContainer {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Slider */
+#sliderContainer {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    width: 300px;
+}
+
+#slider {
+    position: absolute;
+    left: 50%;
+    top: 0px;
+    background-color: #d3d3d3;
+    width: 5px;
+    height: 100%;
+    z-index: 9999;
+}
+
+#slider:hover {
+    cursor: ew-resize;
+}
+
+/* SliderHandle */
+#sliderHandle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25px;
+    /* Diametro del cerchio */
+    height: 25px;
+    /* Diametro del cerchio */
+    background-color: #d3d3d3;
+    /* Colore del cerchio */
+    border-radius: 50%;
+    /* Rende l'elemento circolare */
+    z-index: 10000;
+    /* Assicurati che sia sopra gli altri elementi */
+}
+
+#slider:hover #sliderHandle {
+    cursor: ew-resize;
+    /* Mantieni il cursore di tipo slider anche nello sliderHandle*/
+}
+
+/* Testi */
+#textLeft,
+#textRight {
+    position: absolute;
+    top: 40%;
+    /* Centrato verticalmente */
+    font-size: 36px;
+    /* Font più grande */
+    color: white;
+    /* Colore bianco */
+    font-weight: bold;
+    /* Rende il testo in grassetto */
+    z-index: 9999;
+    transition: opacity 0.3s ease-in-out;
+    transform: translateY(-50%);
+    /* Centrato verticalmente */
+    text-shadow: 2px 2px 4px black, -2px -2px 4px black, 2px -2px 4px black, -2px 2px 4px black;
+    /* Simula un bordo nero attorno al testo */
+}
+
+#textLeft {
+    left: 30%;
+    /* Posizione a sinistra */
+    opacity: 1;
+}
+
+#textRight {
+    right: 30%;
+    /* Posizione a destra */
+    opacity: 1;
+}

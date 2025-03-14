@@ -56,7 +56,7 @@ const tileset = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
     url : 'http://localhost:8003/example/tileset.json'
 }));
 ```
----
+
 ## Main results
 
 <center><img src="img/test.png" width="600" align="center"></center>
@@ -65,7 +65,7 @@ Da immagine è possibile vedere un set di modelli tiled importati correttamente 
 
 A seguito della naturale conformità delle frane è stato necessario in corrispondenza di questi modelli eseguire un'operazione di sottrazione sulla superficie del terreno, che ha rimosso la parte di suolo che sovrastava la frana. Senza questo i modelli in questione sarebbero stati visibili solo in parte, poiché coperti dal terreno circostante.
 
-
+<center><img src="img/tile resolution.png" width="500" align="center"></center>
 
 Diverse prove sono state effettuate dimostrando come la qualità dei modelli tiled è alta, con una visualizzazione chiara dei dettagli architettonici grazie alla loro intrinseca struttura di suddivisione in piccoli tiles che rappresentano sezioni geografiche del modello. Ogni tile può avere diversi livelli di dettaglio (LOD) che vengono renderizzati sequenzialmente in base alla distanza dalla camera.
 
@@ -77,7 +77,7 @@ Questa differenza si nota maggiormente nei modelli in formato obj i quali, oltre
 
 <center><img src="img/obj.png" width="600" align="center"></center>
 
-
+Nei modelli Tiled, abbiamo integrato strutture KML e GeoJSON, rendendole interattive e cliccabili per visualizzare informazioni sulle zone di interesse.
 
 <center><img src="img/gif.gif" width="600" align="center"></center>
 <center><img src="img/infobox.png" width="300" align="center"></center>

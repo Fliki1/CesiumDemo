@@ -83,3 +83,7 @@ Nei modelli Tiled, abbiamo integrato strutture KML e GeoJSON, rendendole interat
 <center><img src="img/infobox.png" width="300" align="center"></center>
 
 Gli esperimenti sono stati condotti sui modelli ottenuti dalle survey realizzate per l'Innovation Grant HaMMon nel comune di Tredozio.
+
+## Acknowledgements
+
+This work is supported by Italian Research Center on High Performance Computing Big Data and Quantum Computing (ICSC), project funded by European Union - NextGenerationEU - and National Recovery and Resilience Plan (NRRP) - Mission 4 Component 2 within the activities of Spoke 3 (Astrophysics and Cosmos Observations

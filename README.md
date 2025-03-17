@@ -28,7 +28,7 @@ test/
 The repository also includes a preliminary GUI that lets users apply or remove visual effects.
 
 ## Running a Local Server
-To run the project locally, you can use the Live Server extension for Visual Studio Code (ritwickdey.LiveServer), which simulates a local server for the `index.html` file of each demo. After installing the extension, simply right-click the HTML file and select Start Live Server to launch it in your browser.
+To run the project locally, you can use the Live Server extension for Visual Studio Code (ritwickdey.LiveServer), which simulates a local webserver for the `index.html` file of each demo. After installing the extension, simply right-click the HTML file and select Start Live Server to launch it in your browser.
 
 <center><img src="img/image.png" width="200" align="center"></center>
 
@@ -44,13 +44,13 @@ npm install http-server -g
 ```
 This globally installs [http-server](https://github.com/http-party/http-server), a simple static file server.
 
-Next, navigate to the `test` directory and start the server with:
+Next, navigate to the `test` directory and start the webserver with:
 ```bash
 http-server -a localhost -p 8003 --cors=http://localhost:8080/
 ```
-This starts a local server on `localhost`, using port `8003`. The `--cors` option allows Cesium to access the locally hosted data.
+This starts a local webserver on `localhost`, using port `8003`. The `--cors` option allows Cesium to access the locally hosted data.
 
-To load a tileset from the local server, use the following code:
+To load a tileset from the local webserver, use the following code:
 ```javascript
 const tileset = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
     url : 'http://localhost:8003/example/tileset.json'
